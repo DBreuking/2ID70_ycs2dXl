@@ -1,0 +1,4 @@
+SELECT studentregistrationstodegrees.studentid, studentregistrationstodegrees.DegreeId
+FROM studentregistrationstodegrees
+WHERE EXISTS (SELECT studentid FROM passedStudentDegree WHERE passedStudentDegree.studentid = studentregistrationstodegrees.studentid AND passedStudentDegree.DegreeId = studentregistrationstodegrees.DegreeId)
+ORDER BY studentregistrationstodegrees.studentid, studentregistrationstodegrees.DegreeId;
