@@ -61,3 +61,6 @@ CREATE UNLOGGED TABLE CourseRegistrations (
   Grade integer
 );
 
+ALTER TABLE StudentRegistrationsToDegrees 
+ADD GPA FLOAT;
+

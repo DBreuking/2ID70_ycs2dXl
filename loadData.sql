@@ -16,11 +16,18 @@ COPY StudentAssistants (CourseOfferId, StudentRegistrationId) FROM '/mnt/ramdisk
 
 COPY CourseRegistrations (CourseOfferId, StudentRegistrationId, Grade) FROM '/mnt/ramdisk/tables/CourseRegistrations.table' DELIMITER ',' CSV HEADER  NULL AS 'null';
 
+UPDATE TABLE StudentRegistrationsToDegrees 
+SET GPA	= AVG(grade)
+FROM StudentRegistrationsToDegrees
+INNER JOIN courseregistrations
+ON courseregistrations.StudentRegistrationId = StudentRegistrationsToDegrees.StudentRegistrationId;
+
 ALTER TABLE Degrees ADD PRIMARY KEY (DegreeId);
 ALTER TABLE Students ADD PRIMARY KEY (StudentId);
 ALTER TABLE StudentRegistrationsToDegrees ADD PRIMARY KEY (StudentRegistrationId);
 ALTER TABLE Teachers ADD PRIMARY KEY (TeacherId);
 ALTER TABLE Courses ADD PRIMARY KEY (CourseId);
 ALTER TABLE CourseOffers ADD PRIMARY KEY (CourseOfferId);
+
 
 ANALYZE VERBOSE;
